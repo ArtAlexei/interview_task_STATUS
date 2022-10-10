@@ -12,6 +12,7 @@ items = [
 ]
 ts = TreeStore(items)
 
+
 assert ts.getItem(7) == {"id": 7, "parent": 4, "type": None}
 assert ts.getAll() == [
     {"id": 1, "parent": "root"},

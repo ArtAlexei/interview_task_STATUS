@@ -1,26 +1,29 @@
+from collections import defaultdict
+
+
 class TreeStore:
     def __init__(self, items):
-        self.storage = {}
+        self.items = {}
+        self.children = defaultdict(list)
+
         for item in items:
             id = item.pop("id")
-            item["children"] = []
-            self.storage[id] = item
-
+            self.items[id] = item
             perent = item["parent"]
             if perent != "root":
-                self.storage[perent]["children"].append(id)
+                self.children[perent].append(id)
+        pass
 
     def getItem(self, id):
-        item = self.storage[id].copy()
+        item = self.items[id].copy()
         item["id"] = id
-        del item["children"]
         return item
 
     def getAll(self):
-        return [self.getItem(item) for item in self.storage]
+        return [self.getItem(item) for item in self.items]
 
     def getChildren(self, id):
-        return [self.getItem(item) for item in self.storage[id]["children"]]
+        return [self.getItem(item) for item in self.children[id]]
 
     def getAllParents(self, id):
         items = []
