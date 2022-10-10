@@ -17,16 +17,10 @@ class TreeStore:
         return item
 
     def getAll(self):
-        items = []
-        for item in self.storage:
-            items.append(self.getItem(item))
-        return items
+        return [self.getItem(item) for item in self.storage]
 
     def getChildren(self, id):
-        items = []
-        for item in self.storage[id]["children"]:
-            items.append(self.getItem(item))
-        return items
+        return [self.getItem(item) for item in self.storage[id]["children"]]
 
     def getAllParents(self, id):
         items = []
